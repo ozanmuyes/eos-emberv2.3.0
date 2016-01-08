@@ -9,6 +9,8 @@ Router.map(function() {
   this.route('login', {path: 'giris'});
 
   this.route('users', { path: 'kullanicilar' });
+
+  this.route('permissions', { path: 'izinler' });
 });
 
 export default Router;
