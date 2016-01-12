@@ -1,9 +1,8 @@
-{{link-to "Home" "index"}}
-
+{{link-to "Home" "index"}}<br>
 {{#if session.isAuthenticated}}
   <a href="" {{action 'invalidateSession'}}>Logout</a>
 {{else}}
   login
-{{/if}}
-
+{{/if}}<br>
+<br>
 {{outlet}}

@@ -1,16 +1,30 @@
 import Ember from 'ember';
-import UnauthenticatedRouteMixin from 'ember-simple-auth/mixins/unauthenticated-route-mixin';
 
-export default Ember.Controller.extend(UnauthenticatedRouteMixin, {
+export default Ember.Controller.extend({
   session: Ember.inject.service(),
+  error: null,
 
   actions: {
-    authenticate: function () {
-      let credentials = this.getProperties('identification', 'password');
+    logUserIn(email, password) {
+      Ember.Logger.info(
+        "User logging in with " +
+        "email: '" + email + "' " +
+        "password: '" + password + "'."
+      );
 
-      this.get("session").authenticate("authenticator:jwt", credentials).catch((reason) => {
-        this.set('errorMessage', reason.errors.detail || reason.errors.title);
+      // reset the error while trying to authenticate the credentials
+      this.set("error", null);
+
+      this.get("session").authenticate("authenticator:jwt", {
+        identification: email,
+        password: password
+      }).catch((reason) => {
+        Ember.Logger.error(reason);
+        this.set("error", reason);
       });
+
+      // prevent bubbling
+      return false;
     }
   }
 });
