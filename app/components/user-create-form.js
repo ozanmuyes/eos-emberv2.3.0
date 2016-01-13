@@ -1,22 +1,24 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
-  newUser: {
-    first_name: "",
-    middle_name: "",
-    lsst_name: "",
-    email: ""
-  },
-  actions: {
-    createUser: function () {
-      console.log(this.get("newUser"));
-      return;
+  classNames: ['eos-component', 'component-user-create-form'],
+  classNameBindings: ['_error:has-error'],
 
-      var store = this.store;
+  first_name: "",
+  last_name: "",
+  email: "",
+  _error: null,
 
-      store.createRecord("user", {
-        first_name: "foo"
-      });
-    }
+  submit () {
+    Ember.Logger.info(
+      "User create form component submit with " +
+      "email: '" + this.get("email") + "' " +
+      "password: '" + this.get("password") + "'."
+    );
+
+    this.get("onSubmit")(this.get("first_name"), this.get("last_name"));
+
+    // prevent bubbling
+    return false;
   }
 });
