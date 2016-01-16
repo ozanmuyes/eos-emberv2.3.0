@@ -1,15 +1,15 @@
-<form>
+<form id="login-form">
   <div class="form-group">
     <label for="e-mail">E-Mail Adresi</label>
-    {{input id='e-mail' placeholder='E-Mail Adresi' value=email}}
+    {{input id='e-mail' placeholder='E-Mail Adresi' value=credentials.email}}
   </div>
 
   <div class="form-group">
     <label for="password">Şifre</label>
-    {{input id='password' placeholder='Şifre' type='password' value=password}}
+    {{input id='password' placeholder='Şifre' type='password' value=credentials.password}}
   </div>
 
-  <button type="submit" class="btn btn-default">Giriş</button>
+  <button type="button" class="btn btn-default" {{action "submit"}}>Giriş</button>
 </form>
 
 {{#if _error}}

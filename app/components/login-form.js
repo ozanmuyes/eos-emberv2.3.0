@@ -2,24 +2,17 @@ import Ember from 'ember';
 
 export default Ember.Component.extend({
   classNames: ['eos-component', 'component-login-form'],
-  classNameBindings: ['_error:has-error'],
+  classNameBindings: ['error:has-error'],
+  error: null,
 
-  email: "",
-  password: "",
-  _error: null,
+  actions: {
+    submit() {
+      // TODO Consider Parsley validation
 
-  submit() {
-    // TODO Consider Parsley validation
+      this.get("onSubmit")();
 
-    Ember.Logger.info(
-      "Login form component submit with " +
-      "email: '" + this.get("email") + "' "+
-      "password: '" + this.get("password") + "'."
-    );
-
-    this.get("onSubmit")(this.get("email"), this.get("password"));
-
-    // prevent bubbling
-    return false;
+      // prevent bubbling
+      return false;
+    }
   }
 });

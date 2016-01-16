@@ -1,3 +1,8 @@
 {{link-to "New User" "users.create"}}<br>
 all users<br>
+<ul>
+  {{#each model as |user|}}
+    <li>{{user.first_name}}</li>
+  {{/each}}
+</ul>
 {{outlet}}
